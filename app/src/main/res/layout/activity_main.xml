@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/linearBackGround"
         android:background="#7E57C2"
         android:gravity="center"
         android:orientation="vertical"
@@ -78,6 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <SeekBar
+                android:id="@+id/seekbarRed"
                 android:progressTint="#FF0000"
                 android:progressBackgroundTint="#CCFF0000"
                 android:thumbTint="#FF0000"
