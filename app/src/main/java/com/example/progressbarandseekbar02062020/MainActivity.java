@@ -7,12 +7,15 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView mTvCurrent,mTvTotal;
     ProgressBar mProgress;
-    int count = 1;
+    Random mRandom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,19 +25,28 @@ public class MainActivity extends AppCompatActivity {
         mTvTotal = findViewById(R.id.textviewTotal);
         mProgress = findViewById(R.id.progressbar);
 
+        mRandom = new Random();
         // CountDownTimer
-
-        CountDownTimer countDownTimer = new CountDownTimer(5000,2000) {
+        final CountDownTimer countDownTimer = new CountDownTimer(100000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                Log.d("BBB",millisUntilFinished + "");
+                if (mProgress.getProgress() >= 100){
+                    onFinish();
+                }else{
+                    mProgress.setProgress(mProgress.getProgress() + mRandom.nextInt(11));
+                    mTvCurrent.setText(mProgress.getProgress() + "%");
+                    mTvTotal.setText(String.format("%d/%d",mProgress.getProgress(),100));
+                }
             }
 
             @Override
             public void onFinish() {
-//                Log.d("BBB",count + "");
+                Toast.makeText(MainActivity.this, "Ket thuc", Toast.LENGTH_SHORT).show();
+                this.cancel();
             }
         };
         countDownTimer.start();
+
+
     }
 }
