@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     LinearLayout mLinearBackGround;
     SeekBar mSkAlpha,mSkRed,mSkGreen,mSkBlue;
     int mValueRed,mValueGreen,mValueBlue,mValueAlpha;
+    String mStringColor = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,5 +82,12 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     }
     public void setColor(Integer alpha , Integer red,Integer green , Integer blue){
         mLinearBackGround.setBackgroundColor(Color.argb(alpha,red, green, blue));
+        mTvRGB.setText(String.format("RGB 255 %d %d %d",red,green,blue));
+        mStringColor = "" + To00Hex(alpha) + To00Hex(red) + To00Hex(green) + To00Hex(blue);
+        mTvHex.setText("HEX # " + mStringColor.toUpperCase());
+    }
+    private static String To00Hex(int value) {
+        String hex = "00".concat(Integer.toHexString(value));
+        return hex.substring(hex.length()-2, hex.length());
     }
 }
