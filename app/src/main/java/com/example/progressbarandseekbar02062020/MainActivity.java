@@ -36,13 +36,14 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         mSkGreen = findViewById(R.id.seekbarGreen);
         mSkBlue = findViewById(R.id.seekbarBlue);
 
-        mValueBlue = mValueGreen = mValueRed = 0;
-        mValueAlpha = 255;
-
         mSkRed.setMax(255);
         mSkGreen.setMax(255);
         mSkBlue.setMax(255);
         mSkAlpha.setMax(255);
+
+        mValueBlue = mValueGreen = mValueRed = 0;
+        mValueAlpha = 255;
+        mSkAlpha.setProgress(255);
 
         mSkRed.setOnSeekBarChangeListener(this);
         mSkGreen.setOnSeekBarChangeListener(this);
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         mTvHex.setText("HEX # " + mStringColor.toUpperCase());
     }
     private static String To00Hex(int value) {
-        String hex = "00".concat(Integer.toHexString(value));
-        return hex.substring(hex.length()-2, hex.length());
+        String hex = Integer.toHexString(value);
+        return hex;
     }
 }
