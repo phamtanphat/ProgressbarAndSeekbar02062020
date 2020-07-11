@@ -16,15 +16,12 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements Debounce {
+public class MainActivity extends AppCompatActivity {
 
     TextView mTvHex,mTvRGB;
     LinearLayout mLinearBackGround;
     SeekBar mSkAlpha,mSkRed,mSkGreen,mSkBlue;
     int mValueRed,mValueGreen,mValueBlue;
-    Debounce mDebounce;
-    Handler mHandler;
-    Boolean mIsRunning = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +36,7 @@ public class MainActivity extends AppCompatActivity implements Debounce {
         mSkBlue = findViewById(R.id.seekbarBlue);
 
         mValueBlue = mValueGreen = mValueRed = 0;
-        mHandler = new Handler();
-        mDebounce = this;
+
         mSkRed.setMax(255);
         mSkGreen.setMax(255);
         mSkBlue.setMax(255);
@@ -49,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements Debounce {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mValueRed = progress;
-                mDebounce.delayTime(true);
+                setColor(mValueRed,mValueGreen,mValueBlue);
             }
 
             @Override
@@ -59,14 +55,14 @@ public class MainActivity extends AppCompatActivity implements Debounce {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mDebounce.delayTime(false);
+
             }
         });
         mSkBlue.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mValueBlue = progress;
-                mDebounce.delayTime(true);
+                setColor(mValueRed,mValueGreen,mValueBlue);
             }
 
             @Override
@@ -76,14 +72,15 @@ public class MainActivity extends AppCompatActivity implements Debounce {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mDebounce.delayTime(false);
+
             }
         });
         mSkGreen.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mValueGreen = progress;
-                mDebounce.delayTime(true);
+                setColor(mValueRed,mValueGreen,mValueBlue);
+
             }
 
             @Override
@@ -93,22 +90,12 @@ public class MainActivity extends AppCompatActivity implements Debounce {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mDebounce.delayTime(true);
+
             }
         });
-
+    }
+    public void setColor(Integer red,Integer green , Integer blue){
+        mLinearBackGround.setBackgroundColor(Color.rgb(red, green, blue));
     }
 
-    @Override
-    public void delayTime(Boolean isDelay) {
-//        if (mIsRunning){
-//            mHandler.
-//        }
-//        mHandler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                mIsRunning = true;
-//            }
-//        },2000);
-    }
 }

@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:id="@+id/linearBackGround"
-        android:background="#7E57C2"
+        tools:background="#7E57C2"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_weight="1"
